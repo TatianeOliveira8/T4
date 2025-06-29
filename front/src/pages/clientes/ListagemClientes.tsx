@@ -36,11 +36,13 @@ const ListagemClientes: React.FC = () => {
   const handleEdit = (cliente: any) => {
     window.location.hash = `#/clientes/editar/${cliente.id}`;
   };
+  
 
   const handleDelete = async (cliente: any) => {
     if (window.confirm('Tem certeza que deseja remover este cliente?')) {
       await apagarCliente(cliente.id);
-      carregarClientes();
+        setClientes(prev=> prev.filter(c => c.id !== cliente.id));
+      //carregarClientes();
       alert('Cliente foi removido com sucesso!');
     }
   };
